@@ -4,44 +4,55 @@
 #include<string>
 
 using namespace std;
+string name;
+string name1[1000],name2[1000],address[1000],number[1000];
+string user_name[1000];
 
-char password[1000];
+string password[1000],temp_password[10];
 
-void password_log(char psasword_star[])
+int index_name1=0;
+int index_name2=0;
+int index_address=0;
+int index_number=0;
+int index_username=0;
+int index_password=0;
+
+int check_temp_hudai_password;
+
+
+bool check_user(string user[], string s,int index)
 {
-    int password_index = 0;
-    char password_temp;
-Start:
-    while(1)
+
+
+    for(int i = 0; i<index; i++)
     {
-        password_temp = getch();
-        // if(password_temp<= 'a' && password_temp>='z' || password_temp<= 'A' && password_temp>='Z' || password_temp<= '0' && password_temp>='9' )
-        if(isalpha(password_temp)|| isdigit(password_temp))
+        if(user[i]==s)
         {
-            password[password_index] = password_temp;
-            password_index++;
-            cout<<"*";
-        }
-
-        if(password_temp == '\b')
-        {
-            password[password_index] = '\b';
-            password_index--;
-        }
-
-        if(password_temp == '\r')
-        {
-            password[password_index] = '\0';
-            break;
+            check_temp_hudai_password = i;
+            return true;
         }
     }
 
-    if(password_index<=5)
+    check_temp_hudai_password = 1000;
+    return(false);
+}
+
+
+
+
+
+void password_log(string pass[],int n)
+{
+    int password_index = 0;
+    char password_temp;
+    pass[n] ="";
+    char ch;
+    ch = _getch();
+    while(ch != 13) //character 13 is enter
     {
-        cout<<"\nPassword should be at least 6 character long. Press enter to try again-\n ";
-        getch();
-        password_index=0;
-        goto Start;
+        pass[n].push_back(ch);
+        cout << '*';
+        ch = _getch();
     }
 }
 
@@ -50,8 +61,6 @@ class login
 
 public:
 
-    string name;
-
     void getinput()
     {
 
@@ -59,13 +68,26 @@ public:
         cout<<"Name: ";
         cin>>name;
         cout<<"Password: ";
-        password_log(password);
+
+        password_log(temp_password,0);
+        if(check_user(user_name,name,index_username))
+        {
+            if(check_temp_hudai_password!=1000)
+            {
+                if(password[check_temp_hudai_password]==temp_password[0])
+                {
+                    cout<<endl<<"\nsuccessfully login."<<endl<<endl;
+                }
+                else
+                {
+                    cout<<endl<<"\nInvalid user name/password"<<endl;
+                }
+
+            }
+        }
         cout<<endl;
         //puts(password);
-        cout<<"successfully login."<<endl<<endl;
-
-
-
+//        cout<<"successfully login."<<endl<<endl;
     };
 
 
@@ -77,23 +99,28 @@ class registration
 
 public:
 
-    string name1,name2,address;
-    int number;
-
     void getinput()
     {
 
         cout<<"Registration[Required] "<<endl;
         cout<<"First name*: ";
-        cin>>name1;
+        cin>>name1[index_name1];
+        index_name1++;
         cout<<"Last name*: ";
-        cin>>name2;
+        cin>>name2[index_name2];
+        index_name2++;
+        cout<<"Username: ";
+        cin>>user_name[index_username];
+        index_username++;
         cout<<"Phone number*: ";
-        cin>>number;
+        cin>>number[index_number];
+        index_number++;
         cout<<"Address*: ";
-        cin>>address;
+        cin>>address[index_address];
+        index_address++;
         cout<<"Password: ";
-        password_log(password);
+        password_log(password,index_password);
+        index_password++;
         cout<<endl;
         //puts(password);
         cout<<endl<<" Registration successful."<<endl<<endl;
@@ -110,17 +137,18 @@ main()
 {
     registration r;
     login l;
-    do{
+    do
+    {
 
 
-    cout<<"1.login"<<"\t\t"<<"2.Registration"<<"\t\t"<<"3.Buy"<<"\t\t"<<"4.Sell"<<"\t\t"<<"5.Exit"<<endl<<endl;
+        cout<<"1.login"<<"\t\t"<<"2.Registration"<<"\t\t"<<"3.Buy"<<"\t\t"<<"4.Sell"<<"\t\t"<<"5.Exit"<<endl<<endl;
 
-    int number, i;
-    cin>>number;
+        int number, i;
+        cin>>number;
 
         switch(number)
 
-    {
+        {
 
         case 1:
             l.getinput();
@@ -142,12 +170,12 @@ main()
             break;
 
 
+        }
+
+
     }
 
-
-}
-
-while(1);
+    while(1);
 
 
 
