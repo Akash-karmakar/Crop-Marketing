@@ -77,6 +77,45 @@ int password_verify(string s,int n)
     }
 }
 
+class login
+{
+    string name;
+    int temp_password;
+    int user_index;
+
+public:
+
+    void getinput()
+    {
+
+        cout<<"Login "<<endl;
+        cout<<"Name: ";
+        cin>>name;
+        cout<<"Password: ";
+        temp_password= password_log();
+
+        user_index =  password_verify(name,temp_password);
+
+        if(user_index==2000)
+        {
+            cout<<endl<<"\n Please registration first"<<endl;
+        }
+
+        else if(user_index!=1000)
+        {
+            cout<<endl<<"\n successfully login."<<endl;
+        }
+        else
+        {
+            cout<<endl<<"\n Invalid user name/password"<<endl;
+        }
+
+        cout<<endl;
+
+    }
+
+};
+
 class registration
 {
     string name1,name2,user_name,address,number;
@@ -100,13 +139,11 @@ public:
         cin>>address;
         cout<<"Password: ";
         temp_password= password_log();
-        //cin>>temp_password;
+
         password.insert(pair<string,int>(user_name,temp_password));
 
-//        password_log(password,index_password);
-//        index_password++;
         cout<<endl;
-        //puts(password);
+
         cout<<endl<<" Registration successful."<<endl<<endl;
 
 
@@ -137,16 +174,17 @@ public:
         cout<<endl;
         if(name_verify(temp_name))
         {
-        cout<<"Apni ki bikroy korte chan?"<<endl<<endl;
-        cout<<"1. Chal."<<"\n"<<"2. Dal."<<"\n"<<"3. Ata."<<endl;
-        cout<<"4. Tel."<<"\n"<<"5. Alu."<<"\n"<<"6. Peyaj."<<endl<<endl;
+            cout<<"Apni ki bikroy korte chan?"<<endl<<endl;
+            cout<<"1. Chal."<<"\n"<<"2. Dal."<<"\n"<<"3. Ata."<<endl;
+            cout<<"4. Tel."<<"\n"<<"5. Alu."<<"\n"<<"6. Peyaj."<<endl<<endl;
 
-        cout<<"Choice: ";
-        cin >> choice;
-        cout << endl;
+            cout<<"Choice: ";
+            cin >> choice;
+            cout << endl;
         }
-        else{
-            cout<<"Please register first."<<endl<<endl;
+        else
+        {
+            cout<<" Please register first."<<endl<<endl;
             choice=7;
             return;
         }
@@ -189,6 +227,7 @@ public:
             product_quantity.insert(pair<string,int>("Peyaj", x));
             product_price.insert(pair<string,int>("Peyaj",y));
             break;
+
         }
     }
     int bikroy_biboron()
@@ -199,7 +238,7 @@ public:
         cin>>temp_choice;
         if(temp_choice==2)
         {
-            cout<<"Product\tQuantity  Price\n";
+            cout<<"\nProduct\tQuantity  Price\n";
             for(it=product_quantity.begin(),st=product_price.begin() ; it!=product_quantity.end(),st!=product_price.end(); it++,st++)
             {
                 cout<<it->first<<"\t"<<it->second<<"\t  "<<st->second<<endl;
@@ -207,27 +246,34 @@ public:
             return(0);
             cout<<endl;
         }
-//        else
-//        {
-//
-//            cout<<"1. Chal."<<"\n"<<"2. Dal."<<"\n"<<"3. Ata."<<endl;
-//            cout<<"4. Tel."<<"\n"<<"5. Alu."<<"\n"<<"6. Peyaj."<<endl;
-//            cout<<"7. Morich."<<"\n"<<"8. Adda."<<"\n"<<"9. Rosun."<<endl;
-//            cout<<"10. Murgir Mangsho."<<"\n"<<"11. Gorur mangsho."<<"\n"<<"12. Khasir mangsho."<<endl;
-//            cout<<"13. mash."<<"\n"<<"14. Fol."<<"\n"<<"15. Shak."<<endl;
-//        }
+        else
+        {
+            cout<<"\nInvalid number."<<endl;
+            cout<<"Choice 1 / 2 "<<endl;
+            cin>>temp_choice;
+            if(temp_choice==2)
+            {
+                cout<<"\nProduct\tQuantity  Price\n";
+                for(it=product_quantity.begin(),st=product_price.begin() ; it!=product_quantity.end(),st!=product_price.end(); it++,st++)
+                {
+                    cout<<it->first<<"\t"<<it->second<<"\t  "<<st->second<<endl;
+                }
+                return(0);
+                cout<<endl;
+            }
+        }
     }
 
     void ponno()
     {
         while(1)
         {
-            fast_choice();
+
             if(temp_choice==2)
             {
                 break;
             }
-
+            fast_choice();
             switch(choice)
             {
             case 1:
@@ -266,83 +312,63 @@ public:
                 break;
 
             default:
-                cout<< "Sorry you enter invalid number:";
-                cout<<"Apni ki bikroy korte chan?"<<endl<<endl;
-                cout<<"1. Chal."<<"\n"<<"2. Dal."<<"\n"<<"3. Ata."<<endl;
-                cout<<"4. Tel."<<"\n"<<"5. Alu."<<"\n"<<"6. Peyaj."<<endl<<endl;
+                cout<< "Sorry you enter invalid number.\n";
+                cout<<"Choice 1 - 6 "<<endl;
                 cin >> choice;
+                cout<<endl;
+                {
+                    if(choice==1)
+                    {
+                        cout<<"Ok, Apni chal bikroy korte chan."<<endl<<endl;
+                        Description(1);
+                        bikroy_biboron();
+                        break;
+                    }
+                    else if(choice==2)
+                    {
+                        cout<<"Ok, Apni Dal bikroy korte chan."<<endl<<endl;
+                        Description(2);
+                        bikroy_biboron();
+                        break;
+                    }
+                    else if(choice==3)
+                    {
+                        cout<<"Ok, Apni Ata bikroy korte chan."<<endl<<endl;
+                        Description(3);
+                        bikroy_biboron();
+                        break;
+                    }
+                    else if(choice==4)
+                    {
+                        cout<<"Ok, Apni Tel bikroy korte chan."<<endl<<endl;
+                        Description(4);
+                        bikroy_biboron();
+                        break;
+                    }
+                    else if(choice==5)
+                    {
+                        cout<<"Ok, Apni Alu bikroy korte chan."<<endl<<endl;
+                        Description(5);
+                        bikroy_biboron();
+                        break;
+                    }
+                    else if(choice==6)
+                    {
+                        cout<<"Ok, Apni Peyaj bikroy korte chan."<<endl<<endl;
+                        Description(6);
+                        bikroy_biboron();
+                        break;
+                    }
+
+                }
+
+                cout << endl;
                 break;
             }
         }
 
     }
 };
-
-
-
-class login
-{
-    string name;
-    int temp_password;
-    int user_index;
-
-public:
-
-    void getinput()
-    {
-
-        cout<<"Login "<<endl;
-        cout<<"Name: ";
-        cin>>name;
-        cout<<"Password: ";
-        temp_password= password_log();
-        //cin>>temp_password;
-        user_index =  password_verify(name,temp_password);
-
-        if(user_index==2000)
-        {
-            cout<<endl<<"Please registration first"<<endl;
-        }
-
-        else if(user_index!=1000)
-        {
-            cout<<endl<<"\nsuccessfully login."<<endl<<endl;
-        }
-        else
-        {
-            cout<<endl<<"\nInvalid user name/password"<<endl;
-        }
-
-
-
-//        password_log(temp_password,0);
-//        if(check_user(user_name,name,index_username))
-//        {
-//            if(check_temp_hudai_password!=1000)
-//            {
-//                if(password[check_temp_hudai_password]==temp_password[0])
-//                {
-//                    cout<<endl<<"\nsuccessfully login."<<endl<<endl;
-//                }
-//                else
-//                {
-//                    cout<<endl<<"\nInvalid user name/password"<<endl;
-//                }
-//
-//            }
-//        }
-        cout<<endl;
-        //puts(password);
-//        cout<<"successfully login."<<endl<<endl;
-    };
-
-
-
-};
-
-
-
-
 
 main()
 {
@@ -355,9 +381,9 @@ main()
 
     while(1)
     {
-        cout<<"1.login"<<"\t\t"<<"2.Registration"<<"\t\t"<<"3.Sell"<<"\t\t"<<"4.Buy"<<"\t\t"<<"5.Exit"<<endl<<endl;
+        cout<<"\n1.login"<<"\t\t"<<"2.Registration"<<"\t\t"<<"3.Sell"<<"\t\t"<<"4.Buy"<<"\t\t"<<"5.Exit"<<endl<<endl;
 
-        int number, i;
+        int number;
         cin>>number;
 
         switch(number)
@@ -377,11 +403,7 @@ main()
         case 3:
             sell_obj[sell_index].ponno();
             sell_index++;
-
-
-            // s.ponno();
-            // product[index_product]=s.ponno();
-            //index_product++;
+            temp_choice=0;
             break;
 
         case 5:
@@ -390,7 +412,7 @@ main()
 
 
         default:
-            cout<<"Wrong Input"<<endl;
+            cout<<"\nWrong Input"<<endl;
             break;
 
 
@@ -399,4 +421,3 @@ main()
 
     }
 }
-
